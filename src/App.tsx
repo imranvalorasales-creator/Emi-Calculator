@@ -7,6 +7,7 @@ import {
   ChevronDown, 
   ChevronUp,
   Info,
+  Share2,
   History,
   TrendingUp,
   CreditCard
@@ -32,6 +33,28 @@ export default function App() {
   const [tenure, setTenure] = useState<string>("20");
   const [tenureType, setTenureType] = useState<'years' | 'months'>('years');
   const [showSchedule, setShowSchedule] = useState(false);
+
+  const handleShare = async () => {
+    const shareData = {
+      title: 'Calculate Karlo',
+      text: 'Calculate your loan EMIs easily with Calculate Karlo!',
+      url: window.location.href,
+    };
+
+    try {
+      if (navigator.share) {
+        await navigator.share(shareData);
+      } else {
+        await navigator.clipboard.writeText(window.location.href);
+        alert('Link copied to clipboard!');
+      }
+    } catch (err) {
+      // Ignore abort errors
+      if ((err as Error).name !== 'AbortError') {
+        console.error('Error sharing:', err);
+      }
+    }
+  };
 
   const calculation = useMemo(() => {
     const p = parseFloat(loanAmount) || 0;
@@ -98,9 +121,18 @@ export default function App() {
             </div>
             <h1 className="text-xl font-bold tracking-tight text-slate-800">Calculate Karlo</h1>
           </div>
-          <button className="p-2 text-slate-400 hover:text-slate-600 transition-colors">
-            <Info className="w-5 h-5" />
-          </button>
+          <div className="flex items-center gap-1">
+            <button 
+              onClick={handleShare}
+              className="p-2 text-slate-400 hover:text-indigo-600 transition-colors"
+              title="Share App"
+            >
+              <Share2 className="w-5 h-5" />
+            </button>
+            <button className="p-2 text-slate-400 hover:text-slate-600 transition-colors">
+              <Info className="w-5 h-5" />
+            </button>
+          </div>
         </div>
       </header>
 
