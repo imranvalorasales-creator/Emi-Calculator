@@ -105,6 +105,17 @@ export default function App() {
       </header>
 
       <main className="max-w-md mx-auto px-6 pt-6 space-y-6">
+        {/* Result Summary */}
+        <section>
+          <div className="bg-indigo-600 p-6 rounded-3xl text-white shadow-xl shadow-indigo-200 relative overflow-hidden text-center">
+            <div className="absolute -right-10 -top-10 w-40 h-40 bg-white/10 rounded-full blur-3xl"></div>
+            <div className="absolute -left-10 -bottom-10 w-40 h-40 bg-indigo-400/20 rounded-full blur-3xl"></div>
+            
+            <p className="text-indigo-100 text-xs font-medium mb-1">Monthly EMI Amount</p>
+            <h2 className="text-3xl font-bold">{formatCurrency(calculation.emi)}</h2>
+          </div>
+        </section>
+
         {/* Input Card */}
         <section className="card space-y-5">
           <div className="input-group">
@@ -181,17 +192,6 @@ export default function App() {
                 {tenureType === 'years' ? 'Yrs' : 'Mos'}
               </span>
             </div>
-          </div>
-        </section>
-
-        {/* Result Summary */}
-        <section>
-          <div className="bg-indigo-600 p-8 rounded-[2rem] text-white shadow-xl shadow-indigo-200 relative overflow-hidden text-center">
-            <div className="absolute -right-10 -top-10 w-40 h-40 bg-white/10 rounded-full blur-3xl"></div>
-            <div className="absolute -left-10 -bottom-10 w-40 h-40 bg-indigo-400/20 rounded-full blur-3xl"></div>
-            
-            <p className="text-indigo-100 text-sm font-medium mb-2">Monthly EMI Amount</p>
-            <h2 className="text-5xl font-bold">{formatCurrency(calculation.emi)}</h2>
           </div>
         </section>
 
